@@ -1,0 +1,15 @@
+---
+- name: Install a list of packages
+  apt:
+    pkg:
+    - postgresql
+    - postgresql-contrib
+
+# sudo -u postgres psql
+# CREATE ROLE vagrant LOGIN PASSWORD 'b3elqmUbLEHy';
+# CREATE DATABASE db_example OWNER = vagrant TEMPLATE='template0' ENCODING = 'UTF8' LC_COLLATE = 'C' LC_CTYPE = 'C';
+
+- name: setup pg_hba.conf
+  shell: echo "host    all             all             192.168.10.0/24         md5" >> /etc/postgresql/12/main/pg_hba.conf
+
+
