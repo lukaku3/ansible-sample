@@ -1,0 +1,13 @@
+---
+- name: Install a list of packages
+  apt:
+    pkg:
+    - apache2
+    - apache2-utils
+    - apache2-ssl-dev
+
+- name: install 000-default.conf
+  copy: src=files/etc/apache2/conf-available/000-default.conf dest=/etc/apache2/conf-available/
+
+- name: Execute the command in remote shell; a2enconf
+  ansible.builtin.shell: a2enconf 000-default

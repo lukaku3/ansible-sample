@@ -1,0 +1,16 @@
+---
+- name: yum update
+  shell: yum update
+
+- name: Prevent multiple packages from being updated
+  community.general.yum_versionlock:
+    state: present
+    name:
+    - httpd
+
+- name: install 000-default.conf
+  copy: src=files/etc/httpd/conf.d/000-default.conf dest=/etc/httpd/conf.d/
+
+- name: Execute the command in remote shell; systemctl restart httpd
+  ansible.builtin.shell: systemctl restart httpd
+
